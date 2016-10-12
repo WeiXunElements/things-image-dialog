@@ -26,12 +26,11 @@
         background-color:transparent;
         margin-bottom:5px;
       }      
+      .image-container,.image-container *{
+        @apply(--layout-flex);
+      }
       .image-container iron-image {
-        float:left;
-        min-width:580px;
-        min-height:380px;
-        max-width:780px;
-        max-height:580px;
+        margin:auto;
       }
       .image-container iron-image::shadow img {
         margin:auto;
@@ -39,8 +38,6 @@
       }
       .image-container {
         @apply(--layout-vertical);
-        min-width:600px;
-        max-width:800px;
       }
       .image {
         @apply(--layout-vertical);
@@ -66,12 +63,12 @@
         @apply(--layout-flex);
         @apply(--layout-vertical);
       }
-      .midium {
+      .medium {
         position: fixed;
-        top: 30%;
-        bottom: 30%;
-        left: 35%;
-        right: 35%;
+        top: 20%;
+        bottom: 20%;
+        left: 25%;
+        right: 25%;
         margin: 0px;
         @apply(--layout-flex);
         @apply(--layout-vertical);
@@ -118,28 +115,47 @@
 
       properties: {
 
+        /**
+         * dialog title
+         */
         title: {
           type: String,
           value: 'Image Dialog'
         },
 
+        /**
+         * attachment id
+         */
         attachmentId: {
           type: Number
         },
 
+        /**
+         * image source url
+         */
         imageUrl: {
           type: String
         },
 
+        /**
+         * dialog size
+         * small < medium < large
+         */
         dialogSize: {
           type: String,
           value: 'small'
         },
 
+        /**
+         * dialog openCallback
+         */
         openCallback: {
           type: Function
         },
 
+        /**
+         * dialog closeCallback
+         */
         closeCallback: {
           type: Function
         }
@@ -150,11 +166,15 @@
         'dialog.iron-overlay-closed' : '_closeHandler'
       },
 
-      open: function(title, attachmentId, dialogSize, openCallback, closeCallback) {
+      open: function(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback) {
         this.title = title;
-        var baseUrl = this.get('globals.baseUrl');
-        this.imageUrl = baseUrl + '/download/' + attachmentId;
-        this.attachmentId = attachmentId;
+        
+        if(imageUrl && !attachmentId) {
+          this.imageUrl = imageUrl;
+        } else if (!imageUrl && attachmentId) {
+          var baseUrl = this.get('globals.baseUrl');
+          this.imageUrl = baseUrl + '/download/' + attachmentId;
+        }
         this.dialogSize  = dialogSize;
         this.openCallback = openCallback;
         this.closeCallback = closeCallback;
