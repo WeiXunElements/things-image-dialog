@@ -1,0 +1,182 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../iron-image/iron-image.html">
+
+<link rel="import" href="../things-global-behavior/things-global-behavior.html">
+
+<dom-module id="things-image-dialog">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background-color:var(--things-whitegrey-background-color);
+      }
+      paper-toolbar {
+        background-color:var(--things-primary-background-color);
+        height:45px;
+        margin-top:0px !important;
+        @apply(--things-padding-clear)
+      }  
+      paper-toolbar .title {
+        margin-left:32px !important;
+        line-height:initial !important;
+      }
+      paper-dialog paper-toolbar:last-child {
+        background-color:transparent;
+        margin-bottom:5px;
+      }      
+      .image-container iron-image {
+        float:left;
+        min-width:580px;
+        min-height:380px;
+        max-width:780px;
+        max-height:580px;
+      }
+      .image-container iron-image::shadow img {
+        margin:auto;
+        max-width:100%
+      }
+      .image-container {
+        @apply(--layout-vertical);
+        min-width:600px;
+        max-width:800px;
+      }
+      .image {
+        @apply(--layout-vertical);
+      }
+      .image:first-child {
+        @apply(--layout-horizontal);
+      }
+      .image:last-child::shadow input {
+        width:68%;
+      }            
+      .close-btn {
+        @apply(--things-header-button);
+        background:url(/images/icon-close.png) 100% 50% no-repeat;
+        margin-right:10px;
+      }
+      .big {
+        position: fixed;
+        top: 10%;
+        bottom: 10%;
+        left: 15%;
+        right: 15%;
+        margin: 0px;
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+      }
+      .midium {
+        position: fixed;
+        top: 30%;
+        bottom: 30%;
+        left: 35%;
+        right: 35%;
+        margin: 0px;
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+      }
+      .small {
+        position: fixed;
+        top: 30%;
+        bottom: 30%;
+        left: 35%;
+        right: 35%;
+        margin: 0px;
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+      }          
+    </style>
+
+    <paper-dialog
+      modal
+      id="dialog"
+      class$="[[dialogSize]]"
+      entry-animation="scale-up-animation"
+      exit-animation="fade-out-animation">
+      <paper-toolbar>
+        <span class="title">[[title]]</span>
+        <div class="buttonsGroup">
+          <button dialog-dismiss class="close-btn"></button>
+        </div>
+      </paper-toolbar>
+
+      <div class="image-container">
+        <div class="image">
+          <iron-image src="[[imageUrl]]"></iron-image>
+        </div>
+      </div>
+    </paper-dialog>  
+  </template>
+  <script>
+    Polymer({
+      is: 'things-image-dialog',
+
+      behaviors: [
+        Things.GlobalBehavior
+      ],
+
+      properties: {
+
+        title: {
+          type: String,
+          value: 'Image Dialog'
+        },
+
+        attachmentId: {
+          type: Number
+        },
+
+        imageUrl: {
+          type: String
+        },
+
+        dialogSize: {
+          type: String,
+          value: 'small'
+        },
+
+        openCallback: {
+          type: Function
+        },
+
+        closeCallback: {
+          type: Function
+        }
+      },
+
+      listeners: {
+        'dialog.iron-overlay-opened' : '_openHandler',
+        'dialog.iron-overlay-closed' : '_closeHandler'
+      },
+
+      open: function(title, attachmentId, dialogSize, openCallback, closeCallback) {
+        this.title = title;
+        var baseUrl = this.get('globals.baseUrl');
+        this.imageUrl = baseUrl + '/download/' + attachmentId;
+        this.attachmentId = attachmentId;
+        this.dialogSize  = dialogSize;
+        this.openCallback = openCallback;
+        this.closeCallback = closeCallback;
+
+        this.$['dialog'].open();
+      },
+
+      close: function() {
+        this.$['dialog'].close();
+      },
+
+      _openHandler: function() {
+        if(this.openCallback) {
+          this.openCallback();
+        }
+      },
+
+      _closeHandler: function() {
+        if(this.closeCallback) {
+          this.closeCallback();
+        }
+      }
+    })
+  </script>
+</dom-module>
