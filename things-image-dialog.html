@@ -53,7 +53,7 @@
         background:url(/images/icon-close.png) 100% 50% no-repeat;
         margin-right:10px;
       }
-      .big {
+      .large {
         position: fixed;
         top: 10%;
         bottom: 10%;
@@ -82,12 +82,12 @@
         margin: 0px;
         @apply(--layout-flex);
         @apply(--layout-vertical);
-      }          
+      }
     </style>
 
     <paper-dialog
       modal
-      id="dialog"
+      id="image-dialog"
       class$="[[dialogSize]]"
       entry-animation="scale-up-animation"
       exit-animation="fade-out-animation">
@@ -162,8 +162,8 @@
       },
 
       listeners: {
-        'dialog.iron-overlay-opened' : '_openHandler',
-        'dialog.iron-overlay-closed' : '_closeHandler'
+        'image-dialog.iron-overlay-opened' : '_openHandler',
+        'image-dialog.iron-overlay-closed' : '_closeHandler'
       },
 
       open: function(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback) {
@@ -179,11 +179,11 @@
         this.openCallback = openCallback;
         this.closeCallback = closeCallback;
 
-        this.$['dialog'].open();
+        this.getDialog().open();
       },
 
       close: function() {
-        this.$['dialog'].close();
+        this.getDialog().close();
       },
 
       _openHandler: function() {
@@ -196,6 +196,10 @@
         if(this.closeCallback) {
           this.closeCallback();
         }
+      },
+
+      getDialog: function() {
+        return this.$['image-dialog'];
       }
     })
   </script>
