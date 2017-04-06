@@ -93,6 +93,7 @@
       modal
       id="image-dialog"
       class$="[[dialogSize]]"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
       entry-animation="scale-up-animation"
       exit-animation="fade-out-animation">
       <paper-toolbar>
@@ -174,6 +175,15 @@
          */
         closeCallback: {
           type: Function
+        },
+        /**
+         * Set to true to disable canceling the overlay with the ESC key.
+         * True로 설정시 cancel dialog에서 ESC key로 꺼지지 않음
+         * @type {Boolean}
+         */
+        noCancelOnEscKey:{
+          type: Boolean,
+          value: false
         }
       },
 
