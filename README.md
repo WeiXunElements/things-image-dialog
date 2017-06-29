@@ -2,20 +2,20 @@
 
 
 Example:
-`noCancelOnEscKey`는 ESC를 사용하여 다이어로그를 Close시킬지 여부에 대한 옵션이다.
+`NoCancelOnEscKey` is an option for determining whether to use ESC to close the dialog.
 
 ```html
 <things-image-dialog id="image-dialog"
   no-cancel-on-esc-key=[[noCancelOnEscKey]]>
 </things-image-dialog>
 ```
-`things-image-dialog-toggle`를 받아서 Dialog Open,Close
-`things-framework`에서는 `things-dialog-manger`로 모든 popup event를 처리한다.
-`event.detail`에는 아래와 같은 내용이 포함될 수 있다.
+Receive `things-image-dialog-toggle` and open/close the dialog.
+In `things-framework`, `things-dialog-manager` handles all popup events.
+`event.detail` may contain the following information.
 
-`title` 필수
-`attachmentId` 필수
-`dialogSize` option
+`title` mandatory
+`attachmentId` mandatory
+`dialogSize` optional
 
 ```js
   var event = {
@@ -32,8 +32,7 @@ Example:
 
 ## Dependencies
 
-Element dependencies are managed via [Bower](http://bower.io/). You can
-install that via:
+Element dependencies are managed via [Bower](http://bower.io/). You can install that via:
 
     npm install -g bower
 
@@ -54,4 +53,4 @@ And you can run it via:
     polymer serve
 
 Once running, you can preview your element at
-`http://localhost:8080/components/things-alarm/`, where `things-alarm` is the name of the directory containing it.
+`http://localhost:8080/components/things-image-dialog/`, where `things-image-dialog` is the name of the directory containing it.
