@@ -8,6 +8,7 @@ Copyright © HatioLab Inc. All rights reserved.
 <link rel="import" href="../iron-image/iron-image.html">
 
 <link rel="import" href="../things-global-behavior/things-global-behavior.html">
+<link rel="import" href="../things-dialog-resize-behavior/things-dialog-resize-behavior.html">
 <!--
 ## Things Image Dialog
 
@@ -62,6 +63,8 @@ Copyright © HatioLab Inc. All rights reserved.
         margin-right:10px;
       }
       .large {
+        height: 80%;
+        width: 70%;
         position: fixed;
         top: 10%;
         bottom: 10%;
@@ -72,6 +75,8 @@ Copyright © HatioLab Inc. All rights reserved.
         @apply(--layout-vertical);
       }
       .medium {
+        height: 60%;
+        width: 50%;
         position: fixed;
         top: 20%;
         bottom: 20%;
@@ -82,6 +87,8 @@ Copyright © HatioLab Inc. All rights reserved.
         @apply(--layout-vertical);
       }
       .small {
+        height: 40%;
+        width: 30%;
         position: fixed;
         top: 30%;
         bottom: 30%;
@@ -100,7 +107,7 @@ Copyright © HatioLab Inc. All rights reserved.
       no-cancel-on-esc-key="[[noCancelOnEscKey]]"
       entry-animation="scale-up-animation"
       exit-animation="fade-out-animation">
-      <paper-toolbar>
+      <paper-toolbar id="dialog-tool-bar">
         <span class="title">[[title]]</span>
         <div class="buttonsGroup">
           <button dialog-dismiss class="close-btn"></button>
@@ -119,7 +126,8 @@ Copyright © HatioLab Inc. All rights reserved.
       is: 'things-image-dialog',
 
       behaviors: [
-        Things.GlobalBehavior
+        Things.GlobalBehavior,
+        Things.DialogResizeBehavior
       ],
 
       properties: {
@@ -188,9 +196,16 @@ Copyright © HatioLab Inc. All rights reserved.
         noCancelOnEscKey:{
           type: Boolean,
           value: false
+        },
+        _dialogId:{
+          type: String,
+          value: 'image-dialog'
+        },
+        _dragTarget:{
+          type: String,
+          value:'dialog-tool-bar'
         }
       },
-
       listeners: {
         'image-dialog.iron-overlay-opened' : '_openHandler',
         'image-dialog.iron-overlay-closed' : '_closeHandler'
