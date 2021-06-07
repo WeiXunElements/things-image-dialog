@@ -1,8 +1,8 @@
 {
   "name": "things-image-dialog",
-  "version": "v2.2.1",
+  "version": "v2.2.2",
   "authors": [
-    "Hatio Lab. <heartyoh@hatiolab.com>"
+    "Shenzhen Weixun"
   ],
   "description": "An element providing a solution to no problem in particular.",
   "keywords": [
@@ -11,8 +11,6 @@
     "seed"
   ],
   "main": "things-image-dialog.html",
-  "license": "http://license.hatiolab.com/EULA",
-  "homepage": "http://elements.hatiolab.com/",
   "ignore": [
     "/.*",
     "/test/"

@@ -1,14 +1,14 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-dialog/paper-dialog.html">
-<link rel="import" href="../paper-toolbar/paper-toolbar.html">
-<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../paper-dialog/paper-dialog.html" />
+<link rel="import" href="../paper-toolbar/paper-toolbar.html" />
+<link rel="import" href="../iron-image/iron-image.html" />
 
-<link rel="import" href="../things-global-behavior/things-global-behavior.html">
-<link rel="import" href="../things-dialog-resize-behavior/things-dialog-resize-behavior.html">
+<link rel="import" href="../things-global-behavior/things-global-behavior.html" />
+<link rel="import" href="../things-dialog-resize-behavior/things-dialog-resize-behavior.html" />
 <!--
 ## Things Image Dialog
 
@@ -19,48 +19,49 @@ Copyright © HatioLab Inc. All rights reserved.
     <style>
       :host {
         display: block;
-        background-color:var(--things-whitegrey-background-color);
+        background-color: var(--things-whitegrey-background-color);
       }
       paper-toolbar {
-        background-color:var(--things-primary-background-color);
-        height:45px;
-        margin-top:0px !important;
-        @apply(--things-padding-clear)
+        background-color: var(--things-primary-background-color);
+        height: 45px;
+        margin-top: 0px !important;
+        @apply (--things-padding-clear);
       }
       paper-toolbar .title {
-        margin-left:32px !important;
-        line-height:initial !important;
+        margin-left: 32px !important;
+        line-height: initial !important;
       }
       paper-dialog paper-toolbar:last-child {
-        background-color:transparent;
-        margin-bottom:5px;
+        background-color: transparent;
+        margin-bottom: 5px;
       }
-      .image-container,.image-container *{
-        @apply(--layout-flex);
+      .image-container,
+      .image-container * {
+        @apply (--layout-flex);
       }
       .image-container iron-image {
-        margin:auto;
+        margin: auto;
       }
       .image-container iron-image::shadow img {
-        margin:auto;
-        max-width:100%
+        margin: auto;
+        max-width: 100%;
       }
       .image-container {
-        @apply(--layout-vertical);
+        @apply (--layout-vertical);
       }
       .image {
-        @apply(--layout-vertical);
+        @apply (--layout-vertical);
       }
       .image:first-child {
-        @apply(--layout-horizontal);
+        @apply (--layout-horizontal);
       }
       .image:last-child::shadow input {
-        width:68%;
+        width: 68%;
       }
       .close-btn {
-        @apply(--things-header-button);
-        background:url(/images/icon-close.png) 100% 50% no-repeat;
-        margin-right:10px;
+        @apply (--things-header-button);
+        background: url(/images/icon-close.png) 100% 50% no-repeat;
+        margin-right: 10px;
       }
       .large {
         height: 80%;
@@ -71,8 +72,8 @@ Copyright © HatioLab Inc. All rights reserved.
         left: 15%;
         right: 15%;
         margin: 0px;
-        @apply(--layout-flex);
-        @apply(--layout-vertical);
+        @apply (--layout-flex);
+        @apply (--layout-vertical);
       }
       .medium {
         height: 60%;
@@ -83,8 +84,8 @@ Copyright © HatioLab Inc. All rights reserved.
         left: 25%;
         right: 25%;
         margin: 0px;
-        @apply(--layout-flex);
-        @apply(--layout-vertical);
+        @apply (--layout-flex);
+        @apply (--layout-vertical);
       }
       .small {
         height: 40%;
@@ -95,8 +96,8 @@ Copyright © HatioLab Inc. All rights reserved.
         left: 35%;
         right: 35%;
         margin: 0px;
-        @apply(--layout-flex);
-        @apply(--layout-vertical);
+        @apply (--layout-flex);
+        @apply (--layout-vertical);
       }
     </style>
 
@@ -106,7 +107,8 @@ Copyright © HatioLab Inc. All rights reserved.
       class$="[[dialogSize]]"
       no-cancel-on-esc-key="[[noCancelOnEscKey]]"
       entry-animation="scale-up-animation"
-      exit-animation="fade-out-animation">
+      exit-animation="fade-out-animation"
+    >
       <paper-toolbar id="dialog-tool-bar">
         <span class="title">[[title]]</span>
         <div class="buttonsGroup">
@@ -125,13 +127,9 @@ Copyright © HatioLab Inc. All rights reserved.
     Polymer({
       is: 'things-image-dialog',
 
-      behaviors: [
-        Things.GlobalBehavior,
-        Things.DialogResizeBehavior
-      ],
+      behaviors: [Things.GlobalBehavior, Things.DialogResizeBehavior],
 
       properties: {
-
         /**
          * dialog title
          * *****
@@ -139,7 +137,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         title: {
           type: String,
-          value: 'Image Dialog'
+          value: 'Image Dialog',
         },
 
         /**
@@ -148,7 +146,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {Number}
          */
         attachmentId: {
-          type: Number
+          type: Number,
         },
 
         /**
@@ -157,7 +155,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {String}
          */
         imageUrl: {
-          type: String
+          type: String,
         },
 
         /**
@@ -168,7 +166,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         dialogSize: {
           type: String,
-          value: 'small'
+          value: 'small',
         },
 
         /**
@@ -177,7 +175,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {Function}
          */
         openCallback: {
-          type: Function
+          type: Function,
         },
 
         /**
@@ -186,41 +184,41 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {Function}
          */
         closeCallback: {
-          type: Function
+          type: Function,
         },
         /**
          * Set to true to disable canceling the overlay with the ESC key.
          * True로 설정시 cancel dialog에서 ESC key로 꺼지지 않음
          * @type {Boolean}
          */
-        noCancelOnEscKey:{
+        noCancelOnEscKey: {
           type: Boolean,
-          value: false
+          value: false,
         },
-        _dialogId:{
+        _dialogId: {
           type: String,
-          value: 'image-dialog'
+          value: 'image-dialog',
         },
-        _dragTarget:{
+        _dragTarget: {
           type: String,
-          value:'dialog-tool-bar'
-        }
+          value: 'dialog-tool-bar',
+        },
       },
       listeners: {
-        'image-dialog.iron-overlay-opened' : '_openHandler',
-        'image-dialog.iron-overlay-closed' : '_closeHandler'
+        'image-dialog.iron-overlay-opened': '_openHandler',
+        'image-dialog.iron-overlay-closed': '_closeHandler',
       },
 
-      open: function(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback) {
+      open: function (title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback) {
         this.title = title;
 
-        if(imageUrl && !attachmentId) {
+        if (imageUrl && !attachmentId) {
           this.imageUrl = imageUrl;
         } else if (!imageUrl && attachmentId) {
           var baseUrl = this.get('globals.baseUrl');
           this.imageUrl = baseUrl + '/download/' + attachmentId;
         }
-        this.dialogSize  = dialogSize;
+        this.dialogSize = dialogSize;
         this.openCallback = openCallback;
         this.closeCallback = closeCallback;
 
@@ -230,18 +228,18 @@ Copyright © HatioLab Inc. All rights reserved.
        * close dialog
        * ******
        */
-      close: function() {
+      close: function () {
         this.getDialog().close();
       },
 
-      _openHandler: function() {
-        if(this.openCallback) {
+      _openHandler: function () {
+        if (this.openCallback) {
           this.openCallback();
         }
       },
 
-      _closeHandler: function() {
-        if(this.closeCallback) {
+      _closeHandler: function () {
+        if (this.closeCallback) {
           this.closeCallback();
         }
       },
@@ -249,9 +247,9 @@ Copyright © HatioLab Inc. All rights reserved.
        * dialog가져오기
        * ******
        */
-      getDialog: function() {
+      getDialog: function () {
         return this.$['image-dialog'];
-      }
-    })
+      },
+    });
   </script>
 </dom-module>
